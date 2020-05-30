@@ -1,21 +1,27 @@
 /**
- * Connect4TextConsole class contains all of the logical
+ * ui.Connect4TextConsole class contains all of the logical
  * UI elements presented to the two players of the game
- * 
+ *
  * @author Jason Green, jgreen44@asu.edu
  * @version 1.0
  */
+
+package ui;
+
+import core.Connect4;
+
+
 public class Connect4TextConsole extends Connect4 {
 
 
     /**
-     * Instantiates a new Connect4TextConsole.
+     * Instantiates a new ui.Connect4TextConsole.
      *
      * @param X the x
      * @param Y the y
      */
 // default constructor
-    public Connect4TextConsole(char X, char Y){
+    public Connect4TextConsole(char X, char Y) {
 
     }
 
@@ -34,7 +40,7 @@ public class Connect4TextConsole extends Connect4 {
         connect.drawGrid(grid);
         System.out.println("Begin Game");
 
-        do{
+        do {
             player = connect.chooseNextPlayer(player);
             System.out.println("Player " + player + " - your turn. Choose a column number from 1 - 7");
             int number = connect.scanner.nextInt();
@@ -43,14 +49,13 @@ public class Connect4TextConsole extends Connect4 {
             // check if number is between 1 and 7
             number = connect.checkNumberValue(number);
 
-            if (connect.validateMove(grid, number)){
+            if (connect.validateMove(grid, number)) {
                 connect.dropChip(grid, number, player);
                 connect.drawGrid(grid);
             }
 
 
-
-        }while(!connect.checkWinner(grid, player));
+        } while (!connect.checkWinner(grid, player));
 
         System.out.println("Player " + player + " has won!");
 

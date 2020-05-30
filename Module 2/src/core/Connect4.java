@@ -1,11 +1,12 @@
-/**
- * Connect4 class contains all the game logic for the
+ /**
+ * core.Connect4 class contains all the game logic for the
  * traditional game of "Connect Four"
  *
  * @author Jason Green, jgreen44@asu.edu
  * @version 1.0
  */
 
+package core;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Connect4 {
     /**
      * Instantiate a new Scanner class.
      */
-    Scanner scanner = new Scanner(System.in);
+    public Scanner scanner = new Scanner(System.in);
 
     /**
      * Instantiates a new Connect 4.
@@ -226,6 +227,6 @@ public class Connect4 {
      * @return the boolean
      */
     public boolean validateMove(char [] @NotNull [] grid, int number){
-        return grid[0][number] == SPACE;
+        return grid[0][number - 1] == SPACE;
     }
 }
