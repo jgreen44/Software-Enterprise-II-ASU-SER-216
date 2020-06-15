@@ -31,7 +31,7 @@ public class Connect4Client extends Application implements Connect4Constants {
     private char myToken = ' ';
 
     // Indicate the token for the other player
-    private char otherToken = ' ';
+    private char otherToken = ' test';
 
     // create the cell
     private Cell[][] cell = new Cell[ROWS][COLS];
