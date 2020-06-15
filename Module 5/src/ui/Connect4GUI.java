@@ -271,7 +271,7 @@ public class Connect4GUI extends Application {
     /**
      * The type Cell.
      */
-// An inner class for a cell
+    // An inner class for a cell
     public class Cell extends Pane {
         // Token used for this cell
         private char token = ' ';
@@ -282,7 +282,7 @@ public class Connect4GUI extends Application {
         public Cell() {
             setStyle("-fx-border-color: black");
             this.setPrefSize(STAGE_WIDTH, STAGE_HEIGHT);
-//            this.setOnMouseClicked(e -> handleMouseClick());
+
         }
 
         /**
@@ -516,34 +516,8 @@ public class Connect4GUI extends Application {
         VBox.setMargin(titleText, new Insets(10, 0, 10, 10));
         vbox.getChildren().addAll(titleText, lblStatus);
 
-
-//        Text bodyText = new Text("Player 1, it's your turn!");
-//        bodyText.setFont(Font.font("Times New Roman", FontWeight.LIGHT, 14));
-//        VBox.setMargin(bodyText, new Insets(10,0,10,10));
-//        vbox.getChildren().add(bodyText);
-
-//        Button resetButton = new Button("Reset");
-//        resetButton.setPrefSize(100, 20);
-//        resetButton.setOnAction(new resetGame());
-//        vbox.getChildren().add(resetButton);
-
         return vbox;
     }
-
-//    /**
-//     * The type Reset game.
-//     */
-//    class resetGame implements EventHandler<ActionEvent> {
-//        @Override
-//        public void handle(ActionEvent e) {
-//            char token = ' ';
-//            for (int i = 0; i < ROWS; i++) {
-//                for (int j = 0; j < COLS; j++) {
-////                    cell[i][j] = token;
-//                }
-//            }
-//        }
-//    }
 
 
     /**
