@@ -11,11 +11,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-
+/**
+ * Connect4 Server - Accepts connections from Connect4 clients
+ */
 public class Connect4Server extends Application implements Connect4Constants {
     private int sessionNo = 1; // Number a session
 
-    @Override // Override the start method in the Application class
+    /**
+     * Override the start method in the Application class
+     * @param primaryStage
+     */
+    @Override
     public void start(Stage primaryStage) {
         TextArea taLog = new TextArea();
 
@@ -34,8 +40,7 @@ public class Connect4Server extends Application implements Connect4Constants {
 
                 // Ready to create a session for every two players
                 while (true) {
-                    Platform.runLater(() -> taLog.appendText(new Date() +
-                            ": Wait for players to join session " + sessionNo + '\n'));
+                    Platform.runLater(() -> taLog.appendText(new Date() + ": Wait for players to join session " + sessionNo + '\n'));
 
                     // Connect to player 1
                     Socket player1 = serverSocket.accept();
@@ -48,8 +53,7 @@ public class Connect4Server extends Application implements Connect4Constants {
                     });
 
                     // Notify that the player is Player 1
-                    new DataOutputStream(
-                            player1.getOutputStream()).writeInt(PLAYER1);
+                    new DataOutputStream(player1.getOutputStream()).writeInt(PLAYER1);
 
                     // Connect to player 2
                     Socket player2 = serverSocket.accept();
@@ -62,8 +66,7 @@ public class Connect4Server extends Application implements Connect4Constants {
                     });
 
                     // Notify that the player is Player 2
-                    new DataOutputStream(
-                            player2.getOutputStream()).writeInt(PLAYER2);
+                    new DataOutputStream(player2.getOutputStream()).writeInt(PLAYER2);
 
                     // Display this session and increment session number
                     Platform.runLater(() ->
@@ -79,13 +82,15 @@ public class Connect4Server extends Application implements Connect4Constants {
         }).start();
     }
 
-    // Define the thread class for handling a new session for two players
-    class HandleASession implements Runnable, Connect4Constants {
-        private Socket player1;
-        private Socket player2;
+    /**
+     * Define the thread class for handling a new session for two players
+     */
+    static class HandleASession implements Runnable, Connect4Constants {
+        private final Socket player1;
+        private final Socket player2;
 
         // Create and initialize cells
-        private char[][] cell = new char[6][7];
+        private final char[][] cell = new char[6][7];
 
         private DataInputStream fromPlayer1;
         private DataOutputStream toPlayer1;
@@ -93,18 +98,21 @@ public class Connect4Server extends Application implements Connect4Constants {
         private DataOutputStream toPlayer2;
 
         // Continue to play
-        private boolean continueToPlay = true;
+        private final boolean continueToPlay = true;
 
         /**
          * Construct a thread
+         *
+         * @param player1 the player 1
+         * @param player2 the player 2
          */
         public HandleASession(Socket player1, Socket player2) {
             this.player1 = player1;
             this.player2 = player2;
 
             // Initialize cells
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
+            for (int i = 0; i < ROWS; i++)
+                for (int j = 0; j < COLS; j++)
                     cell[i][j] = ' ';
         }
 
@@ -114,14 +122,10 @@ public class Connect4Server extends Application implements Connect4Constants {
         public void run() {
             try {
                 // Create data input and output streams
-                DataInputStream fromPlayer1 = new DataInputStream(
-                        player1.getInputStream());
-                DataOutputStream toPlayer1 = new DataOutputStream(
-                        player1.getOutputStream());
-                DataInputStream fromPlayer2 = new DataInputStream(
-                        player2.getInputStream());
-                DataOutputStream toPlayer2 = new DataOutputStream(
-                        player2.getOutputStream());
+                DataInputStream fromPlayer1 = new DataInputStream(player1.getInputStream());
+                DataOutputStream toPlayer1 = new DataOutputStream(player1.getOutputStream());
+                DataInputStream fromPlayer2 = new DataInputStream(player2.getInputStream());
+                DataOutputStream toPlayer2 = new DataOutputStream(player2.getOutputStream());
 
                 // Write anything to notify player 1 to start
                 // This is just to let player 1 know to start
@@ -191,8 +195,8 @@ public class Connect4Server extends Application implements Connect4Constants {
          * Determine if the cells are all occupied
          */
         private boolean isFull() {
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
+            for (int i = 0; i < ROWS; i++)
+                for (int j = 0; j < COLS; j++)
                     if (cell[i][j] == ' ')
                         return false; // At least one cell is not filled
 
@@ -204,35 +208,62 @@ public class Connect4Server extends Application implements Connect4Constants {
          * Determine if the player with the specified token wins
          */
         private boolean isWon(char token) {
-            // Check all rows
-            for (int i = 0; i < 3; i++)
-                if ((cell[i][0] == token)
-                        && (cell[i][1] == token)
-                        && (cell[i][2] == token)) {
-                    return true;
-                }
 
-            /** Check all columns */
-            for (int j = 0; j < 3; j++)
-                if ((cell[0][j] == token)
-                        && (cell[1][j] == token)
-                        && (cell[2][j] == token)) {
-                    return true;
+            // check horizontal win
+            for (int i = 0; i < ROWS; i++) {
+                for (int j = 0; j < COLS - 3; j++) {
+                    if (cell[i][j] == token &&
+                            cell[i][j + 1] == token &&
+                            cell[i][j + 2] == token &&
+                            cell[i][j + 3] == token) {
+                        System.out.println("horizontal true");
+                        return true;
+                    }
                 }
-
-            /** Check major diagonal */
-            if ((cell[0][0] == token)
-                    && (cell[1][1] == token)
-                    && (cell[2][2] == token)) {
-                return true;
             }
 
-            /** Check subdiagonal */
-            if ((cell[0][2] == token)
-                    && (cell[1][1] == token)
-                    && (cell[2][0] == token)) {
-                return true;
+            // check vertical
+            for (int i = 0; i < ROWS - 3; i++) {
+                for (int j = 0; j < COLS; j++) {
+                    if (cell[i][j] == token &&
+                            cell[i + 1][j] == token &&
+                            cell[i + 2][j] == token &&
+                            cell[i + 3][j] == token) {
+                        System.out.println("vertical true");
+                        return true;
+                    }
+                }
             }
+
+
+            // check diagonal
+            try {
+                // Down
+                for (int i = 0; i < ROWS; i++) {
+                    for (int j = 0; j < COLS - 3; j++) {
+                        if (cell[i][j] == token &&
+                                cell[i - 1][j + 1] == token &&
+                                cell[i - 2][j + 2] == token &&
+                                cell[i - 3][j + 3] == token) {
+                            return true;
+                        }
+                    }
+                }
+                // Up
+                for (int i = 0; i < ROWS - 3; i++) {
+                    for (int j = 0; j < COLS; j++) {
+                        if (cell[i][j] == token &&
+                                cell[i + 1][j + 1] == token &&
+                                cell[i + 2][j + 2] == token &&
+                                cell[i + 3][j + 3] == token) {
+                            return true;
+                        }
+                    }
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                return false;
+            }
+
 
             /** All checked, but no winner */
             return false;
@@ -242,6 +273,8 @@ public class Connect4Server extends Application implements Connect4Constants {
     /**
      * The main method is only needed for the IDE with limited
      * JavaFX support. Not needed for running from the command line.
+     *
+     * @param args the input arguments
      */
     public static void main(String[] args) {
         launch(args);

@@ -22,6 +22,9 @@ import javafx.stage.Stage;
 import ui.Connect4GUI;
 
 
+/**
+ * The Connect4 Client. Connects to the Connect4 Server.
+ */
 public class Connect4Client extends Application implements Connect4Constants {
 
     // Indicate whether the player has the turn
@@ -59,6 +62,11 @@ public class Connect4Client extends Application implements Connect4Constants {
     // Host name or ip
     private String host = "localhost";
 
+    /**
+     * Starts the drawing of the GUI
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -67,7 +75,7 @@ public class Connect4Client extends Application implements Connect4Constants {
         GridPane pane = new GridPane();
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                pane.add(cell[i][j] = new Cell(), j, i);
+                pane.add(cell[i][j] = new Cell(i, j), j, i);
             }
         }
 
@@ -87,8 +95,9 @@ public class Connect4Client extends Application implements Connect4Constants {
         connectToServer();
     }
 
-
-
+    /**
+     * Connects to the server
+     */
     private void connectToServer() {
         try {
             // Create a socket to connect to the server
@@ -111,10 +120,9 @@ public class Connect4Client extends Application implements Connect4Constants {
 
                 // Am I player 1 or 2?
                 if (player == PLAYER1) {
-                    myToken = 'X';
-                    otherToken = 'O';
+                    myToken = '1';
+                    otherToken = '2';
                     Platform.runLater(() -> {
-                        lblTitle.setText("Player 1 with token 'X'");
                         lblStatus.setText("Waiting for player 2 to join");
                     });
 
@@ -123,15 +131,14 @@ public class Connect4Client extends Application implements Connect4Constants {
 
                     // The other player has joined
                     Platform.runLater(() ->
-                            lblStatus.setText("Player 2 has joined. I start first"));
+                            lblStatus.setText("Player 2 has joined. \nYou start first"));
 
                     // It is my turn
                     myTurn = true;
                 } else if (player == PLAYER2) {
-                    myToken = 'O';
-                    otherToken = 'X';
+                    myToken = '2';
+                    otherToken = '1';
                     Platform.runLater(() -> {
-                        lblTitle.setText("Player 2 with token 'O'");
                         lblStatus.setText("Waiting for player 1 to move");
                     });
                 }
@@ -155,7 +162,7 @@ public class Connect4Client extends Application implements Connect4Constants {
     }
 
     /**
-     * Wait for the player to mark a cell
+     * Wait for the player to choose a position
      */
     private void waitForPlayerAction() throws InterruptedException {
         while (waiting) {
@@ -164,6 +171,10 @@ public class Connect4Client extends Application implements Connect4Constants {
         waiting = true;
     }
 
+    /**
+     * Sends the move from the GUI to the Server
+     * @throws IOException
+     */
     private void sendMove() throws IOException {
         toServer.writeInt(rowSelected); // Send the selected row
         toServer.writeInt(columnSelected); // Send the selected column
@@ -179,9 +190,9 @@ public class Connect4Client extends Application implements Connect4Constants {
         if (status == PLAYER1_WON) {
             // Player 1 won, stop playing
             continueToPlay = false;
-            if (myToken == 'X') {
+            if (myToken == '1') {
                 Platform.runLater(() -> lblStatus.setText("I won! (X)"));
-            } else if (myToken == 'O') {
+            } else if (myToken == '2') {
                 Platform.runLater(() ->
                         lblStatus.setText("Player 1 (X) has won!"));
                 receiveMove();
@@ -189,9 +200,9 @@ public class Connect4Client extends Application implements Connect4Constants {
         } else if (status == PLAYER2_WON) {
             // Player 2 won, stop playing
             continueToPlay = false;
-            if (myToken == 'O') {
+            if (myToken == '2') {
                 Platform.runLater(() -> lblStatus.setText("I won! (O)"));
-            } else if (myToken == 'X') {
+            } else if (myToken == '1') {
                 Platform.runLater(() ->
                         lblStatus.setText("Player 2 (O) has won!"));
                 receiveMove();
@@ -202,16 +213,20 @@ public class Connect4Client extends Application implements Connect4Constants {
             Platform.runLater(() ->
                     lblStatus.setText("Game is over, no winner!"));
 
-            if (myToken == 'O') {
+            if (myToken == '2') {
                 receiveMove();
             }
         } else {
             receiveMove();
-            Platform.runLater(() -> lblStatus.setText("My turn"));
+            Platform.runLater(() -> lblStatus.setText("Your turn! \nPlease select a button!"));
             myTurn = true; // It is my turn
         }
     }
 
+    /**
+     * Waits to receive a move from the Server
+     * @throws IOException
+     */
     private void receiveMove() throws IOException {
         // Get the other player's move
         int row = fromServer.readInt();
@@ -365,7 +380,10 @@ public class Connect4Client extends Application implements Connect4Constants {
         }
     }
 
-    public class Cell extends Pane{
+    /**
+     * The type Cell.
+     */
+    public class Cell extends Pane {
 
         // Indicate the row and column of this cell in the board
         private int row;
@@ -377,8 +395,13 @@ public class Connect4Client extends Application implements Connect4Constants {
 
         /**
          * Instantiates a new Cell.
+         *
+         * @param row    the row
+         * @param column the column
          */
-        public Cell() {
+        public Cell(int row, int column) {
+            this.row = row;
+            this.column = column;
             setStyle("-fx-border-color: black");
             this.setPrefSize(STAGE_WIDTH, STAGE_HEIGHT);
 
@@ -395,12 +418,17 @@ public class Connect4Client extends Application implements Connect4Constants {
 
         /**
          * Set a new token
+         *
+         * @param c the c
          */
         public void setToken(char c) {
             token = c;
             repaint();
         }
 
+        /**
+         * Repaint.
+         */
         protected void repaint() {
             Ellipse ellipse = new Ellipse(this.getWidth() / 2,
                     this.getHeight() / 2, this.getWidth() / 2 - 10,
@@ -511,6 +539,8 @@ public class Connect4Client extends Application implements Connect4Constants {
     /**
      * The main method is only needed for the IDE with limited
      * JavaFX support. Not needed for running from the command line.
+     *
+     * @param args the input arguments
      */
     public static void main(String[] args) {
         launch(args);

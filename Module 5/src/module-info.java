@@ -3,7 +3,6 @@ module module5_javafx {
     requires javafx.controls;
 
     opens ui;
-    opens tic_tac_toe;
     opens core;
 
 }

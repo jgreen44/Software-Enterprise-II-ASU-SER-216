@@ -381,7 +381,6 @@ public class Connect4GUI extends Application {
      * @return the boolean
      */
     public boolean isWon(char token) {
-        int counter = 0;
         // check horizontal win
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS - 3; j++) {
