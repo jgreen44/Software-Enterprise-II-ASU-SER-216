@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"module5_javafx","l":"core"},{"m":"module5_javafx","l":"ui"}]

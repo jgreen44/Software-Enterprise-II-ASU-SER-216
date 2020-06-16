@@ -1,3 +1,12 @@
+/**
+ * core.Connect4Server class contains all the game logic for the
+ * traditional game of "Connect Four" and allows multiple
+ * clients to connect to the server
+ *
+ * @author Jason Green, jgreen44@asu.edu
+ * @version 1.0
+ */
+
 package core;
 
 import java.io.*;

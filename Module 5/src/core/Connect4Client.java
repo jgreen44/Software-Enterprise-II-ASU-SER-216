@@ -1,3 +1,11 @@
+/**
+ * core.Connect4Client class contains the GUI for the
+ * traditional game of "Connect Four" using a Client to connect
+ * to a Server
+ *
+ * @author Jason Green, jgreen44@asu.edu
+ * @version 1.0
+ */
 package core;
 
 import java.io.*;
