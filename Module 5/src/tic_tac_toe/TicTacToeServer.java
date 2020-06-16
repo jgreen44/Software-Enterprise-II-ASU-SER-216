@@ -27,7 +27,7 @@ public class TicTacToeServer extends Application
     new Thread( () -> {
       try {
         // Create a server socket
-        ServerSocket serverSocket = new ServerSocket(8000);
+        ServerSocket serverSocket = new ServerSocket(8004);
         Platform.runLater(() -> taLog.appendText(new Date() +
           ": Server started at socket 8004\n"));
   
