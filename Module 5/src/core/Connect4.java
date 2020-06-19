@@ -8,6 +8,8 @@
 
 package core;
 
+import ui.Connect4TextConsole;
+
 import java.util.Scanner;
 
 /**
@@ -44,28 +46,28 @@ public class Connect4 {
     }
 
 
-    /**
-     * Checks the number to make sure the user
-     * has chosen 1 - 7.
-     *
-     * @param number the number
-     * @return the int
-     */
-    public static int checkNumberValue(int number) {
-        Scanner scanner = new Scanner(System.in);
-        boolean checkNumber = true;
-        if (number < 1 || number > 7) {
-            while (checkNumber) {
-                System.out.println("Please choose a number between 1 - 7");
-                number = scanner.nextInt();
-                if (number > 0 && number < 8) {
-                    checkNumber = false;
-                }
-            }
-        }
-        scanner.close();
-        return number;
-    }
+//    /**
+//     * Checks the number to make sure the user
+//     * has chosen 1 - 7.
+//     *
+//     * @param number the number
+//     * @return the int
+//     */
+//    public static int checkNumberValue(int number) {
+//        Scanner scanner = new Scanner(System.in);
+//        boolean checkNumber = true;
+//        if (number < 1 || number > 7) {
+//            while (checkNumber) {
+//                System.out.println("Please choose a number between 1 - 7");
+//                number = scanner.nextInt();
+//                if (number > 0 && number < 8) {
+//                    checkNumber = false;
+//                }
+//            }
+//        }
+////        scanner.close();
+//        return number;
+//    }
 
     /**
      * Places an X or O depending on what column the
@@ -256,11 +258,9 @@ public class Connect4 {
             while (!scanner.hasNextInt()) {
                 System.out.println("Please enter a number only!");
                 scanner.next();
-
-
             }
             number = scanner.nextInt();
-            checkNumberValue(number);
+            Connect4TextConsole.checkNumberValue(number);
             scanner.close();
         }
         return true;

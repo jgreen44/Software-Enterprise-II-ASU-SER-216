@@ -63,7 +63,7 @@ public class Connect4 {
                 }
             }
         }
-        scanner.close();
+//        scanner.close();
         return number;
     }
 

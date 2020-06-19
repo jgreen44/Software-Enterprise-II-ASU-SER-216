@@ -63,7 +63,7 @@ public class Connect4 {
                 }
             }
         }
-        scanner.close();
+//        scanner.close();
         return number;
     }
 
@@ -261,7 +261,7 @@ public class Connect4 {
             }
             number = scanner.nextInt();
             checkNumberValue(number);
-            scanner.close();
+//            scanner.close();
         }
         return true;
     }

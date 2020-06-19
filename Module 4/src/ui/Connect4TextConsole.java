@@ -43,20 +43,6 @@ public class Connect4TextConsole extends Connect4 {
         drawGrid(grid);
         System.out.println("Begin Game");
 
-//        System.out.println("Choose GUI or Console based game");
-//        System.out.println("Press 'G' for GUI, 'C' for Console");
-//
-////        // check if user inputs only a string, not an integer
-////        while(scanner.hasNextInt()){
-////            System.out.println("Please only enter 'G' or 'C'!");
-////            scanner.next();
-////        }
-////
-////        String gui = scanner.next();
-//        String gui = "G";
-//        if(gui.equalsIgnoreCase("G")){
-//            Connect4GUI.mainStart();
-//        }else if(gui.equalsIgnoreCase("C")) {
 
 
             System.out.println("Enter 'P' if you want to play against " +

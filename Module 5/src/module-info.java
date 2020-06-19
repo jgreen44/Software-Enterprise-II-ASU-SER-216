@@ -4,5 +4,6 @@ module module5_javafx {
 
     opens ui;
     opens core;
+    opens tic_tac_toe;
 
 }
