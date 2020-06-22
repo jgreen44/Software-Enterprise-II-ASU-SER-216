@@ -1,5 +1,6 @@
 package ui;
 
+import core.Connect4Client;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -264,6 +265,7 @@ public class Connect4GUI extends Application {
             playComputer = false;
             computersTurn = false;
             lblStatus.setText("You are playing against another \nperson! \nPlayer 1, please start!");
+
         }
     }
 

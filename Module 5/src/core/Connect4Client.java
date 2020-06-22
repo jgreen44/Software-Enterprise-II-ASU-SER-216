@@ -11,6 +11,7 @@ package core;
 import java.io.*;
 import java.net.*;
 import java.util.Date;
+import java.util.Random;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -109,7 +110,7 @@ public class Connect4Client extends Application implements Connect4Constants {
     private void connectToServer() {
         try {
             // Create a socket to connect to the server
-            Socket socket = new Socket(host, 8000);
+            Socket socket = new Socket(host, 8080);
 
             // Create an input stream to receive data from the server
             fromServer = new DataInputStream(socket.getInputStream());
@@ -130,9 +131,9 @@ public class Connect4Client extends Application implements Connect4Constants {
                 if (player == PLAYER1) {
                     myToken = '1';
                     otherToken = '2';
-                    Platform.runLater(() -> {
-                        lblStatus.setText("Waiting for player 2 to join");
-                    });
+//                    Platform.runLater(() -> {
+//                        lblStatus.setText("Do you want to play the computer or another person?");
+//                    });
 
                     // Receive startup notification from the server
                     fromServer.readInt(); // Whatever read is ignored
@@ -521,6 +522,8 @@ public class Connect4Client extends Application implements Connect4Constants {
 //        number1.setOnAction(new ButtonOne())
 
         return hbox;
+
+
     }
 
     /**
@@ -533,6 +536,31 @@ public class Connect4Client extends Application implements Connect4Constants {
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(20));
         vbox.setSpacing(8);
+
+//        Text whichPlayer = new Text("Select to play the computer \nor another person!");
+//        whichPlayer.setFont(Font.font("Arial", FontWeight.LIGHT, 14));
+//
+//        Button computer = new Button("Computer");
+//        Button person = new Button("Person");
+//        vbox.getChildren().addAll(whichPlayer, computer, person);
+//
+//        computer.setOnAction(e -> {
+//            new Connect4Server(true);
+////            Connect4Server.playComputer = true;
+////            Connect4Server.computersTurn = false;
+//            lblStatus.setText("You are playing against the \ncomputer! \nPlayer 1, please start!");
+//            computer.setDisable(true);
+//            person.setDisable(true);
+//            connectToServer();
+//        });
+//        person.setOnAction(e -> {
+////            Connect4Server.playComputer = false;
+////            Connect4Server.computersTurn = false;
+//            lblStatus.setText("Please run a second \ninstance of this class!");
+//            person.setDisable(true);
+//            computer.setDisable(true);
+//        });
+
 
 
         Text titleText = new Text("Moves:");

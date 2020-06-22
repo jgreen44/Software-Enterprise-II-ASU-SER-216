@@ -7,6 +7,7 @@ public interface Connect4Constants {
     public static int PLAYER2_WON = 2; // Indicate player 2 won
     public static int DRAW = 3; // Indicate a draw
     public static int CONTINUE = 4; // Indicate to continue
+    public static int COMPUTER = 5;
     public static int ROWS = 6;
     public static int COLS = 7;
     public static int STAGE_WIDTH = 975;

@@ -25,9 +25,23 @@ import javafx.stage.Stage;
  */
 public class Connect4Server extends Application implements Connect4Constants {
     private int sessionNo = 1; // Number a session
+    // Controls if user wants to play the computer
+//    public static boolean playComputer;
+//    public static boolean computersTurn;
+
+
+//    public Connect4Server() {
+//
+//    }
+//
+//    public Connect4Server(boolean playComputer) {
+//        this.playComputer = playComputer;
+//    }
+
 
     /**
      * Override the start method in the Application class
+     *
      * @param primaryStage
      */
     @Override
@@ -43,7 +57,7 @@ public class Connect4Server extends Application implements Connect4Constants {
         new Thread(() -> {
             try {
                 // Create a server socket
-                ServerSocket serverSocket = new ServerSocket(8000);
+                ServerSocket serverSocket = new ServerSocket(8080);
                 Platform.runLater(() -> taLog.appendText(new Date() +
                         ": Server started at socket 8000\n"));
 
@@ -66,7 +80,6 @@ public class Connect4Server extends Application implements Connect4Constants {
 
                     // Connect to player 2
                     Socket player2 = serverSocket.accept();
-
                     Platform.runLater(() -> {
                         taLog.appendText(new Date() +
                                 ": Player 2 joined session " + sessionNo + '\n');
@@ -85,6 +98,7 @@ public class Connect4Server extends Application implements Connect4Constants {
                     // Launch a new thread for this session of two players
                     new Thread(new HandleASession(player1, player2)).start();
                 }
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
