@@ -261,7 +261,7 @@ public class Connect4 {
             }
             number = scanner.nextInt();
             Connect4TextConsole.checkNumberValue(number);
-            scanner.close();
+//            scanner.close();
         }
         return true;
     }
