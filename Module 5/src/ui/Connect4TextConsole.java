@@ -44,6 +44,7 @@ public class Connect4TextConsole extends Connect4 {
         System.out.println("Begin Game");
 
 
+
             System.out.println("Enter 'P' if you want to play against " +
                     "another player; enter 'C' to play against computer");
 
