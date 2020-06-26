@@ -207,14 +207,15 @@ public class Connect4 {
      */
     public boolean checkTie(char[][] grid, char player){
         int tracker = 0;
-        for (int i = 0; i < grid.length ; i++) {
+        for (int i = 0; i < grid[0].length ; i++) {
             if(grid[0][i] != SPACE){
                 tracker++;
             }
-            if(tracker == 7){
-                System.out.println("There is a tie!");
-                return false;
-            }
+
+        }
+        if(tracker == 7){
+            System.out.println("There is a tie!");
+            return false;
         }
         return true;
     }

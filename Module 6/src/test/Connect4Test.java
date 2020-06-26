@@ -103,6 +103,36 @@ public class Connect4Test {
 
     };
 
+    char[][] gridBlankTwo = {
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '}
+
+    };
+
+    char[][] gridDropChipO = {
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', 'O', ' ', ' ', ' ', ' '}
+
+    };
+
+    char[][] gridDropChipX = {
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            {'X', ' ', ' ', ' ', ' ', ' ', ' '}
+
+    };
+
     char[][] gridBlank = new char[6][7];
 
     @Before
@@ -171,14 +201,16 @@ public class Connect4Test {
 
     @Test
     public void testCheckTie() {
-        assertTrue(connect4.checkTie(gridBlank, 'X'));
-        assertTrue(connect4.checkTie(gridBlank, 'O'));
+//        assertTrue(connect4.checkTie(gridTie, 'X'));
+        assertEquals(false, connect4.checkTie(gridTie, 'X'));
+        assertEquals(false, connect4.checkTie(gridTie, 'O'));
+
     }
 
     @Test
     public void testCheckWinner() {
-        assertEquals(true, connect4.checkWinner(gridTie, 'X'));
-        assertEquals(true, connect4.checkWinner(gridTie, 'O'));
+        assertEquals(false, connect4.checkWinner(gridTie, 'X'));
+        assertEquals(false, connect4.checkWinner(gridTie, 'O'));
         assertEquals(false, connect4.checkWinner(gridHorizontalX, 'X'));
         assertEquals(false,connect4.checkWinner(gridVeritcalX, 'X'));
         assertEquals(false,connect4.checkWinner(gridDiagonalUpX, 'X'));
@@ -190,15 +222,16 @@ public class Connect4Test {
 
     }
 
-    @Test
-    public void testValidatePersonMove(){
-        char[][] gridTest = new char[6][7];
-        assertEquals(false, connect4.validatePersonMove(gridTest, 'a'));
-//        assertEquals(true, connect4.validatePersonMove(gridTest, 3));
-    }
 
-//    @Test
-//    public void testInitializeArray(){
-//        assertNotNull("true", connect4.initializeArray(gridBlank));
-//    }
+    @Test
+    public void testInitializeArray(){
+        connect4.initializeArray(gridBlank);
+        gridBlankTwo = gridBlank;
+        for (int i = 0; i < gridBlank.length ; i++) {
+            for (int j = 0; j < gridBlank[0].length ; j++) {
+                assertEquals(gridBlankTwo[i][j], gridBlank[i][j]);
+            }
+        }
+
+    }
 }
