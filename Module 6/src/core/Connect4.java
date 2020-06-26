@@ -46,29 +46,6 @@ public class Connect4 {
     }
 
 
-//    /**
-//     * Checks the number to make sure the user
-//     * has chosen 1 - 7.
-//     *
-//     * @param number the number
-//     * @return the int
-//     */
-//    public static int checkNumberValue(int number) {
-//        Scanner scanner = new Scanner(System.in);
-//        boolean checkNumber = true;
-//        if (number < 1 || number > 7) {
-//            while (checkNumber) {
-//                System.out.println("Please choose a number between 1 - 7");
-//                number = scanner.nextInt();
-//                if (number > 0 && number < 8) {
-//                    checkNumber = false;
-//                }
-//            }
-//        }
-////        scanner.close();
-//        return number;
-//    }
-
     /**
      * Places an X or O depending on what column the
      * player chooses.
