@@ -8,31 +8,34 @@ import org.junit.Test;
 
 import core.Connect4;
 
+/**
+ * The type Connect 4 test.
+ */
 public class Connect4Test {
     private Connect4 connect4;
 
     // check Player X
-    char[][] gridDiagonalDownX = {
+    private char[][] gridDiagonalDownX = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', 'X', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', 'X', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', 'X', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', 'X'}
+            {' ', ' ', ' ', 'O', 'X', ' ', ' '},
+            {' ', ' ', ' ', 'X', 'O', 'X', ' '},
+            {' ', ' ', ' ', 'O', 'X', 'O', 'X'}
 
     };
 
-    char[][] gridDiagonalUpX = {
+    private char[][] gridDiagonalUpX = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', 'X', ' ', ' ', ' '},
-            {' ', ' ', 'X', ' ', ' ', ' ', ' '},
-            {' ', 'X', ' ', ' ', ' ', ' ', ' '},
-            {'X', ' ', ' ', ' ', ' ', ' ', ' '}
+            {' ', ' ', 'X', 'O', ' ', ' ', ' '},
+            {' ', 'X', 'O', 'X', ' ', ' ', ' '},
+            {'X', 'O', 'X', 'O', ' ', ' ', ' '}
 
     };
 
-    char[][] gridVeritcalX = {
+    private char[][] gridVeritcalX = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', 'X', ' ', ' ', ' ', ' ', ' '},
@@ -42,38 +45,38 @@ public class Connect4Test {
 
     };
 
-    char[][] gridHorizontalX = {
+    private char[][] gridHorizontalX = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', 'X', 'X', 'X', 'X'},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' '}
+            {' ', ' ', ' ', 'O', 'X', 'O', 'O'},
+            {' ', ' ', ' ', 'X', 'X', 'O', 'X'}
 
     };
 
     // check Player O
-    char[][] gridDiagonalDownO = {
+    private char[][] gridDiagonalDownO = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', 'O', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', 'O', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', 'O', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', 'O'}
+            {' ', ' ', ' ', 'X', 'O', ' ', ' '},
+            {' ', ' ', ' ', 'O', 'X', 'O', ' '},
+            {' ', ' ', ' ', 'X', 'O', 'X', 'O'}
 
     };
 
-    char[][] gridDiagonalUpO = {
+    private char[][] gridDiagonalUpO = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', 'O', ' ', ' ', ' '},
-            {' ', ' ', 'O', ' ', ' ', ' ', ' '},
-            {' ', 'O', ' ', ' ', ' ', ' ', ' '},
-            {'O', ' ', ' ', ' ', ' ', ' ', ' '}
+            {' ', ' ', 'O', 'X', ' ', ' ', ' '},
+            {' ', 'O', 'X', 'O', ' ', ' ', ' '},
+            {'O', 'X', 'O', 'X', ' ', ' ', ' '}
 
     };
 
-    char[][] gridVeritcalO = {
+    private char[][] gridVeritcalO = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', 'O', ' ', ' ', ' ', ' ', ' '},
@@ -83,17 +86,17 @@ public class Connect4Test {
 
     };
 
-    char[][] gridHorizontalO = {
+    private char[][] gridHorizontalO = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {'O', 'O', 'O', 'O', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {' ', ' ', ' ', ' ', ' ', ' ', ' '}
+            {'x', 'O', 'X', 'O', ' ', ' ', ' '},
+            {'O', 'X', 'O', 'X', ' ', ' ', ' '}
 
     };
 
-    char[][] gridTie = {
+    private char[][] gridTie = {
             {'X', 'X', 'O', 'O', 'X', 'X', 'X'},
             {'O', 'O', 'X', 'X', 'O', 'O', 'O'},
             {'X', 'X', 'O', 'O', 'X', 'X', 'X'},
@@ -103,7 +106,7 @@ public class Connect4Test {
 
     };
 
-    char[][] gridBlankTwo = {
+    private char[][] gridBlankTwo = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -113,7 +116,7 @@ public class Connect4Test {
 
     };
 
-    char[][] gridDropChipO = {
+    private char[][] gridDropChipO = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -123,34 +126,50 @@ public class Connect4Test {
 
     };
 
-    char[][] gridDropChipX = {
+    private char[][] gridDropChipX = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            {'X', ' ', ' ', ' ', ' ', ' ', ' '}
+            {' ', ' ', 'X', ' ', ' ', ' ', ' '}
 
     };
 
-    char[][] gridBlank = new char[6][7];
+    private char[][] gridBlank = new char[6][7];
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp() throws Exception {
         connect4 = new Connect4();
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown() throws Exception {
 
     }
 
+    /**
+     * Test choose next player.
+     */
     @Test
     public void testChooseNextPlayer() {
         assertEquals('X', connect4.chooseNextPlayer('O'));
         assertEquals('O', connect4.chooseNextPlayer('X'));
     }
 
+    /**
+     * Test check diagonal down.
+     */
     @Test
     public void testCheckDiagonalDown() {
         assertTrue(connect4.checkDiagonalDown(gridDiagonalDownX, 'X'));
@@ -161,6 +180,9 @@ public class Connect4Test {
         assertFalse(connect4.checkDiagonalDown(gridBlank, 'O'));
     }
 
+    /**
+     * Test check diagonal up.
+     */
     @Test
     public void testCheckDiagonalUp() {
         assertTrue(connect4.checkDiagonalUp(gridDiagonalUpX, 'X'));
@@ -171,6 +193,9 @@ public class Connect4Test {
         assertFalse(connect4.checkDiagonalUp(gridBlank, 'O'));
     }
 
+    /**
+     * Test check vertical.
+     */
     @Test
     public void testCheckVertical() {
         assertTrue(connect4.checkVertical(gridVeritcalX, 'X'));
@@ -181,6 +206,9 @@ public class Connect4Test {
         assertFalse(connect4.checkVertical(gridBlank, 'O'));
     }
 
+    /**
+     * Test check horizontal.
+     */
     @Test
     public void testCheckHorizontal() {
         assertTrue(connect4.checkHorizontal(gridHorizontalX, 'X'));
@@ -191,14 +219,42 @@ public class Connect4Test {
         assertFalse(connect4.checkHorizontal(gridBlank, 'O'));
     }
 
-//    @Test
-//    public void testDropChip(){
-//        char [][] testGrid = new char[0][1];
-//        connect4.dropChip(testGrid, 1, 'X' );
-//        assertEquals('X', connect4.dropChip(testGrid, 1, 'X'));
-//    }
+    /**
+     * Test drop chip.
+     */
+    @Test
+    public void testDropChip(){
+        connect4.dropChip(gridDropChipX, 1, 'X');
+
+        gridBlank = gridDropChipX;
+        for (int i = 0; i < gridBlank.length ; i++) {
+            for (int j = 0; j < gridBlank[0].length ; j++) {
+                assertEquals(gridDropChipX[i][j], gridBlank[i][j]);
+            }
+        }
+//        connect4.dropChip(gridDropChipX, 2, 'O');
+
+    }
+
+    /**
+     * Test draw grid.
+     */
+    @Test
+    public void testDrawGrid(){
+        connect4.drawGrid(gridBlank);
+        gridBlankTwo = gridBlank;
+        for (int i = 0; i < gridBlank.length ; i++) {
+            for (int j = 0; j < gridBlank[0].length ; j++) {
+                assertEquals(gridBlankTwo[i][j], gridBlank[i][j]);
+            }
+        }
+
+    }
 
 
+    /**
+     * Test check tie.
+     */
     @Test
     public void testCheckTie() {
 //        assertTrue(connect4.checkTie(gridTie, 'X'));
@@ -207,6 +263,9 @@ public class Connect4Test {
 
     }
 
+    /**
+     * Test check winner.
+     */
     @Test
     public void testCheckWinner() {
         assertEquals(false, connect4.checkWinner(gridTie, 'X'));
@@ -223,6 +282,9 @@ public class Connect4Test {
     }
 
 
+    /**
+     * Test initialize array.
+     */
     @Test
     public void testInitializeArray(){
         connect4.initializeArray(gridBlank);
