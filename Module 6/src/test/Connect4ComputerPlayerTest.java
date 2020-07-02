@@ -15,7 +15,7 @@ public class Connect4ComputerPlayerTest {
     private Connect4ComputerPlayer computerPlayer;
 
 
-    private char [][] gridBlank = new char [6][7];
+    private char[][] gridBlank = new char[6][7];
     private char[][] gridDropChipO = {
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -62,7 +62,7 @@ public class Connect4ComputerPlayerTest {
      * Test choose next player.
      */
     @Test
-    public void testChooseNextPlayer(){
+    public void testChooseNextPlayer() {
         assertEquals('O', computerPlayer.chooseNextPlayer('X'));
         assertEquals('X', computerPlayer.chooseNextPlayer('O'));
     }
@@ -71,15 +71,23 @@ public class Connect4ComputerPlayerTest {
      * Test computer make move.
      */
     @Test
-    public void testComputerMakeMove(){
+    public void testComputerMakeMove() {
         computerPlayer.computerMakeMove(gridDropChipX, 'X');
 
         gridDropChipX = gridBlank;
-        for (int i = 0; i < gridBlank.length ; i++) {
-            for (int j = 0; j < gridBlank[0].length ; j++) {
+        for (int i = 0; i < gridBlank.length; i++) {
+            for (int j = 0; j < gridBlank[0].length; j++) {
                 assertEquals(gridDropChipX[i][j], gridBlank[i][j]);
             }
         }
-    }
 
+        computerPlayer.computerMakeMove(gridDropChipO, 'O');
+
+        gridDropChipO = gridBlank;
+        for (int i = 0; i < gridBlank.length; i++) {
+            for (int j = 0; j < gridBlank[0].length; j++) {
+                assertEquals(gridDropChipO[i][j], gridBlank[i][j]);
+            }
+        }
+    }
 }
